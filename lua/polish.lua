@@ -1,7 +1,7 @@
-local dap = require('dap')
+local dap = require "dap"
 
 local function load_project_specific_dap()
-  local dap_config_path = vim.fn.getcwd() .. '/.vim/dap.lua'
+  local dap_config_path = vim.fn.getcwd() .. "/.vim/dap.lua"
   if vim.fn.filereadable(dap_config_path) == 1 then
     local project_dap = dofile(dap_config_path)
     if project_dap and project_dap.dap then
@@ -30,7 +30,7 @@ local function load_project_specific_dap()
         name = "Launch file",
         program = "${file}",
         pythonPath = function()
-          local conda_prefix = os.getenv("CONDA_PREFIX")
+          local conda_prefix = os.getenv "CONDA_PREFIX"
           if conda_prefix then
             return conda_prefix .. "/bin/python"
           else
@@ -44,9 +44,7 @@ local function load_project_specific_dap()
             end
           end
         end,
-        cwd = function()
-          return vim.fn.getcwd()
-        end,
+        cwd = function() return vim.fn.getcwd() end,
       },
     }
   end
